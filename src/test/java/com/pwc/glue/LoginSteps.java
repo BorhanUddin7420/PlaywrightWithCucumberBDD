@@ -1,4 +1,4 @@
-package stepdefinitaions;
+package com.pwc.glue;
 
 import com.pages.LoginPage;
 import com.qa.managers.DriverFactory;
@@ -6,11 +6,12 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
+import org.assertj.core.api.SoftAssertions;
+import org.junit.jupiter.api.Assertions;
 
 public class LoginSteps {
 
-    private LoginPage loginPage = new LoginPage(DriverFactory.getPage());
+    private final LoginPage loginPage = new LoginPage(DriverFactory.getPage());
 
     @Given("customer is on login page")
     public void customer_is_on_login_page() {
@@ -21,7 +22,7 @@ public class LoginSteps {
     @And("Verify login page title should be {string}")
     public void verifyLoginPageTitleShouldBe(String exPageTitle) {
         String acPageTitle = loginPage.getLoginPageTitle();
-        Assert.assertEquals(exPageTitle, acPageTitle);
+        Assertions.assertEquals(exPageTitle, acPageTitle);
     }
 
 
@@ -40,7 +41,7 @@ public class LoginSteps {
     public void verifyCustomerLoginSuccessfully() {
         loginPage.clickHomePageMyAccountMenu();
         String acPageTitle = loginPage.getMyAccountPageHeaderTitle();
-        String exPageTitle = "My account - Customer info test";
-        Assert.assertEquals(acPageTitle, exPageTitle);
+        String exPageTitle = "My account - Customer info";
+        Assertions.assertEquals(acPageTitle, exPageTitle);
     }
 }

@@ -7,6 +7,6 @@ Feature: Login page feature
     And customer click login button in login page
     Then Verify customer login successfully
     Examples:
-      | email               | password |
-      | admin@yourStore.com | admin    |
-      | borhan@bs-23.net    | 12345678 |
+      | email               | password     |
+      | admin@yourStore.com | invalidPassword |
+      | borhan@bs-23.net    | 12345678     |

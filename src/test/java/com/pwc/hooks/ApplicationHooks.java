@@ -1,11 +1,11 @@
-package apphooks;
+package com.pwc.hooks;
 
 import com.microsoft.playwright.Page;
-import com.pages.LoginPage;
 import com.qa.managers.DriverFactory;
 import com.qa.util.ConfigReader;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.BeforeAll;
 import io.cucumber.java.Scenario;
 import org.apache.commons.io.FileUtils;
 
@@ -17,36 +17,36 @@ import java.util.Properties;
 
 
 public class ApplicationHooks {
-
     private Page page;
     Properties props;
-    protected LoginPage loginPage;
 
-    @Before(order = 0)
-    public void init_ExtentReport() {
+    @BeforeAll
+    public static void init_ExtentReportDir() {
         try {
             Files.createDirectories(Paths.get(System.getProperty("user.dir") + "/report/"));
             Files.createDirectories(Paths.get(System.getProperty("user.dir") + "/report/screenshots/"));
             Files.createDirectories(Paths.get(System.getProperty("user.dir") + "/report/SparkReportHTML/"));
+            Files.createDirectories(Paths.get(System.getProperty("user.dir") + "/report/Json/"));
+            Files.createDirectories(Paths.get(System.getProperty("user.dir") + "/report/Xml/"));
             Files.createDirectories(Paths.get(System.getProperty("user.dir") + "/report/SparkReportPDF/"));
+            Files.createDirectories(Paths.get(System.getProperty("user.dir") + "/report/Html/"));
             //delete all failed scenario screenshot from screenshots folder
             FileUtils.cleanDirectory(new File(System.getProperty("user.dir") + "/report/screenshots/"));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error");
         }
     }
 
-    @Before(order = 1)
+    @Before(order = 0)
     public void getProperty() {
         ConfigReader configReader = new ConfigReader();
         props = configReader.init_browser();
     }
 
-    @Before(order = 2)
+    @Before(order = 1)
     public void lunchBrowser() {
         DriverFactory driverFactory = new DriverFactory();
         page = driverFactory.initBrowser(props);
-        loginPage = new LoginPage(page);
     }
 
     @After(order = 0)
@@ -57,7 +57,7 @@ public class ApplicationHooks {
     @After(order = 1)
     public void takeFailedScreenshot(Scenario sc) {
         if (sc.isFailed()) {
-            String screenshotName = sc.getName().replaceAll("", "_");
+            String screenshotName = sc.getName().replaceAll("", "");
             byte[] sourcePath = page.screenshot();
             sc.attach(sourcePath, "image/png", screenshotName);
         }

@@ -4,15 +4,15 @@ skipColor: a89132
 displayFeature: true
 displayScenario: true
 displayDetailed: true
+displayAttached: true
+displayExpanded: false
 
-summaryConfig:
+dashboardConfig:
   title: Test Automation Report
   dataBackgroundColor: 4F0CC8
-  titleColor: 00305e
+  titleColor: FF0000
   dateColor: 969696
-  #startTimeColor: 000000
-  #endTimeColor: 000000
-  #durationColor: 000000
+  timeColor: 000000
   dial:
     featureRanges: 60 95
     scenarioRanges: 70 90
@@ -21,13 +21,18 @@ summaryConfig:
     averageColor: 93ffff
     goodColor: 32ecab
 
+summaryConfig:
+  totalColor: FF0000
+  durationColor: FF0000
+
+tagConfig:
+  totalColor: FF0000
+
 featureConfig:
-  #itemcount: 10
   totalColor: FF0000
   durationColor: FF0000
 
 scenarioConfig:
-  #itemcount: 12
   totalColor: FF0000
   durationColor: FF0000
 
@@ -42,7 +47,7 @@ detailedFeatureConfig:
   durationBackgroundColor: 404040
 
 detailedScenarioConfig:
-  featureNameColor: C0C0C0
+  featureNameColor: 404040
   scenarioNameColor: FF0000
   startEndTimeColor: 000000
   tagColor: 404040
@@ -55,8 +60,16 @@ detailedScenarioConfig:
 
 detailedStepHookConfig:
   stepTextColor: 0000FF
+  stepBackgroundColor: FFFFFF
   hookTextColor: 00FF00
+  hookBackgroundColor: FFFFFF
   durationColor: FF0000
   errorMsgColor: 000000
   logMsgColor: 000000
-  #mediaMsgColor: FF0000
+  #skipHooks: true
+  #skipScenarioHooks: false
+  #skipStepHooks: false
+  #skipScenarioBeforeHooks: false
+  #skipScenarioAfterHooks: false
+  #skipStepBeforeHooks: false
+  #skipStepAfterHooks: false
